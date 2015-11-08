@@ -1,9 +1,9 @@
 {
   "name": "wetfish-login",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "Rachel Fish <rachel@wetfish.net>",
   "description": "The SDK for wetfish login",
-  "dependencies" : {
+  "dependencies": {
     "request": "2.47.0"
   },
   "main": "server/node/wetfish-login.js",
