@@ -1,0 +1,10 @@
+{
+  "name": "wetfish-login-demo",
+  "version": "0.1.0",
+  "author": "Rachel Fish <rachel@wetfish.net>",
+  "description": "A demo for the wetfish login SDK",
+  "dependencies": {
+    "wetfish-login": "^0.1.0"
+  },
+  "license": "MIT"
+}
