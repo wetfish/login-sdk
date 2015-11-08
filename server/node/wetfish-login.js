@@ -7,6 +7,20 @@ var login =
     app_id: false,
     app_secret: false,
 
+    parse: function(input)
+    {
+        try
+        {
+            var parsed = JSON.parse(response.body);
+        }
+        catch(error)
+        {
+            var parsed = {'status': 'error', 'message': 'Unable to decode response from server'};
+        }
+
+        return parsed;
+    }
+
     init: function(config)
     {
         if(typeof config == "undefined")
@@ -30,15 +44,14 @@ var login =
     {        
         request.get('https://login.wetfish.net/apps/verify', {form: {token: token}}, function(error, response)
         {
-            // Parse inputs
-            var input = JSON.parse(response.body);
-
+            var input = login.parse(response.body);
+        
             if(input.status == 'error')
             {
                 callback(input);
                 return;
             }
-
+                
             var challenge = input.challenge;
             var data = new Buffer(input.data, 'base64');
 
@@ -48,15 +61,7 @@ var login =
             // Post request
             request.post('https://login.wetfish.net/apps/verify', {form: {challenge: challenge, signature: signature}}, function(error, response)
             {
-                try
-                {
-                    var data = JSON.parse(response.body);
-                }
-                catch(error)
-                {
-                    var data = {'status': 'error', 'message': 'Unable to decode response from server'};
-                }
-                
+                var data = login.parse(response.body);
                 callback(data);
             });
         
